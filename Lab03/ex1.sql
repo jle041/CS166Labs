@@ -55,6 +55,8 @@ CREATE TABLE work_in (ssn numeric(9, 0) NOT NULL,
 CREATE TABLE work_proj (since DATE NOT NULL,
 			pno INTEGER NOT NULL,
 			SSN numeric(9, 0) NOT NULL,
+			supervise CHAR(20) NOT NULL,
 			PRIMARY KEY(pno, SSN),
 			FOREIGN KEY(pno) REFERENCES Project(pno),
-			FOREIGN KEY(SSN) REFERENCES Graduate(SSN));
+			FOREIGN KEY(SSN) REFERENCES Graduate(SSN)
+			FOREIGN KEY(supervise) REFERENCES Professor(ssn));
