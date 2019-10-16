@@ -23,7 +23,7 @@ CREATE TABLE Songs(songid numeric(9, 0),
 			title CHAR(20),
 			author CHAR(20),
 			appears CHAR(20) NOT NULL,
-			PRIMARY KEY(songid)
+			PRIMARY KEY(songid),
 			FOREIGN KEY(appears) REFERENCES Album(albumidentifier));
 
 CREATE TABLE Album(albumidentifier numeric(9, 0),
@@ -31,11 +31,13 @@ CREATE TABLE Album(albumidentifier numeric(9, 0),
 			speed CHAR(20),
 			title CHAR(20),
 			producer CHAR(20) NOT NULL,
-			PRIMARY KEY(albumidentifier)
+			PRIMARY KEY(albumidentifier),
 			FOREIGN KEY(producer) REFERENCES Musician(ssn));
 
 CREATE TABLE Place(address CHAR(40),
-			PRIMARY KEY(address));
+			home CHAR(20) NOT NULL,
+			PRIMARY KEY(address),
+			FOREIGN KEY(home) REFERENCES Telephone(phone_no));
 
 CREATE TABLE Telephone(phone_no CHAR(20),
 			home CHAR(40) NOT NULL,
@@ -51,7 +53,7 @@ CREATE TABLE perform(ssn numeric(9, 0) NOT NULL,
 			songid numeric(9, 0) NOT NULL,
 			PRIMARY KEY(ssn, songid),
 			FOREIGN KEY(ssn) REFERENCES Musician(ssn),
-			FOREIGN KEY(songid) REFERENCES Instrument(songid));
+			FOREIGN KEY(songid) REFERENCES Songs(songid));
 
 CREATE TABLE lives(ssn numeric(9, 0) NOT NULL,
 			address CHAR(40) NOT NULL,
