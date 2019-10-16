@@ -4,7 +4,8 @@ DROP TABLE IF EXISTS Place;
 DROP TABLE IF EXISTS Telephone;
 DROP TABLE IF EXISTS Songs;
 DROP TABLE IF EXISTS Album;
-
+DROP TABLE IF EXISTS Place;
+DROP TABLE IF EXISTS Telephone;
 
 CREATE TABLE Musician(ssn numeric(9, 0),
 			name CHAR(20),
@@ -36,3 +37,21 @@ CREATE TABLE Place(address CHAR(40),
 CREATE TABLE Telephone(phone_no CHAR(20),
 			home CHAR(40) NOT NULL,
 			FOREIGN KEY(home) REFERENCES Place(address));
+
+CREATE TABLE plays(ssn numeric(9, 0) NOT NULL,
+			instrid numeric(9, 0) NOT NULL,
+			PRIMARY KEY(ssn, instrid),
+			FOREIGN KEY(ssn) REFERENCES Musician(ssn),
+			FOREIGN KEY(instrid) REFERENCES Instrument(instrid));
+
+CREATE TABLE perform(ssn numeric(9, 0) NOT NULL,
+			songid numeric(9, 0) NOT NULL,
+			PRIMARY KEY(ssn, songid),
+			FOREIGN KEY(ssn) REFERENCES Musician(ssn),
+			FOREIGN KEY(songid) REFERENCES Instrument(songid));
+
+CREATE TABLE lives(ssn numeric(9, 0) NOT NULL,
+			address CHAR(40) NOT NULL,
+			PRIMARY KEY(ssn, address),
+			FOREIGN KEY(ssn) REFERENCES Musician(ssn),
+			FOREIGN KEY(address) REFERENCES Place(address));
